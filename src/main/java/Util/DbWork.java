@@ -1,7 +1,5 @@
 package Util;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
@@ -19,6 +17,12 @@ public class DbWork{
 
     public void setConnection() throws SQLException {
         if (this.connection == null || this.connection.isClosed()){
+            try {
+                Class.forName("org.postgresql.Driver");
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
             String fullUrl="jdbc:";
             Properties p = getProperties();
             fullUrl+=p.getProperty("db.app")+"://";
