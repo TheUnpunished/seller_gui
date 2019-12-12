@@ -178,7 +178,11 @@ public class MainframeController implements Initializable {
     }
 
     private void handleFile(Boolean toFile){
-        File file = new File(("src/main/resources/Dynamic/"+getCurrentTab().getText())+".txt");
+        File file = new File("files/");
+        if(!file.exists()){
+            file.mkdir();
+        }
+        file = new File(("files/"+getCurrentTab().getText())+".txt");
         FileDAO fileDAO = new FileDAOImpl(file,"'");
         AnchorPane anchorPane = (AnchorPane) getCurrentTab().getContent();
         ListView listView = getListView(anchorPane);
